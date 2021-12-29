@@ -3,12 +3,30 @@
 @section('title', 'Socios')
 
 @section('content_header')
-    <h1>Datos Socio</h1>
+    
 @stop
 
 @section('content')
+<br>
 <div class="card">
+    <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs">
+          <li class="nav-item">
+            <a class="nav-link active" href="">Detalles</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{route('socios.deuda',$socio)}}">Deudas</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="">Pagos</a>
+          </li>
+        </ul>
+      </div>
+
     <div class="card-body">
+        <div align="center">
+            <h5 class="font-weight-bold px-2">DATOS COMPLETOS</h5>
+        </div>
         <form method="post" action="{{route('socios.update',$socio)}}" novalidate >
 
             @csrf
@@ -83,7 +101,7 @@
             <br>
             <br>
             
-            <button  class="btn btn-danger btn-sm" type="submit">Registrar</button>
+            <button  class="btn btn-danger btn-sm" type="submit">Actualiar</button>
 
             <a href="{{route('socios.index')}}"class="btn btn-warning text-white btn-sm">Volver</a>
         </form>

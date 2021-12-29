@@ -15,6 +15,12 @@ class CreateDeudasTable extends Migration
     {
         Schema::create('deudas', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('id_socio')->nullable();
+            $table->string('descripcion');
+            $table->float('monto');
+            $table->string('estado');
+            $table->foreign('id_socio')->references('id')->on('deudas')->onDelete('set null')->onUpdate('cascade');
+
             $table->timestamps();
         });
     }

@@ -240,19 +240,38 @@ return [
         
        
         
-        ['header' => 'AJUSTES'],
+        ['header' => 'CONFIGURACION'],
         [
-            'text' => 'Perfil',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
-        ],
+             'text' => 'Perfil',
+             'url'  => 'user/profile/',
+             'icon' => 'fas fa-user-edit',
+         ],
 
         ['header' => 'ADMINISTRACION'],
+
+        [
+            'text' => 'Usuarios',
+            'route'  => 'admin.users.index',
+            'icon' => 'fas fa-user-lock',
+            'icon_color'=>'primary',
+            'can' => 'cruds'
+        ],
         [
             'text' => 'Socios',
             'url'  => 'socios',
             'icon' => 'fas fa-users',
         ],
+        [
+            'text' => 'Deudas de socios',
+            'url'  => 'deudas',
+            'icon' => 'fas fa-file-invoice-dollar',
+        ],
+        [
+            'text' => 'Pagos',
+            'url'  => 'pagos',
+            'icon' => 'fas fa-money-bill-wave',
+        ],
+        
         
         
     ],

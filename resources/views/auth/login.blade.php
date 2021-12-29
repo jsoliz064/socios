@@ -1,7 +1,5 @@
-@extends('layouts.app')
 
-@section('content')
-<div class="container">
+{{--  <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -69,5 +67,40 @@
             </div>
         </div>
     </div>
+</div>  --}}
+<head>
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<div class="container">
+    <div class="login">
+        <h1>Login</h1>
+        <br>
+        <form method="POST" action="{{ route('login') }}">
+            @csrf
+            
+                <input id="email" type="email" placeholder="Username" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+
+                @error('email')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+                    
+                <input id="password" type="password" placeholder="Password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+
+                @error('password')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+               
+
+            <button type="submit" class="btn btn-primary btn-block btn-large">Ingresar</button>
+        </form>
+    </div>
 </div>
-@endsection
+
+<div class="container">
+
+</div>
+

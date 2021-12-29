@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Socio;
+use App\Models\Deuda;
+
 use Illuminate\Http\Request;
 
 class SocioController extends Controller
@@ -12,6 +14,11 @@ class SocioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {   //               ('can:materias.index') aprobando permiso, ->only('index') solo para el metodo index
+        $this->middleware('can:cruds');
+    }
+
     public function index()
     {
         $socios=Socio::all();
@@ -61,6 +68,12 @@ class SocioController extends Controller
     {
     }
 
+    public function show_deuda(Socio $socio)
+    {
+        $deudas=Deuda::where('id_socio',$socio->id)->get();
+        return view('socios.show_deuda',compact('deudas','socio'));
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -70,7 +83,6 @@ class SocioController extends Controller
     public function edit(Socio $socio)
     {
         return view('socios.edit',compact('socio'));
-        
     }
 
     /**
