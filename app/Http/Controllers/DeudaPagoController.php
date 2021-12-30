@@ -34,7 +34,7 @@ class DeudaPagoController extends Controller
         //
     }
     public function create_detalle(Socio $socio){
-        $deudas=DB::select("SELECT * FROM deudas WHERE id_socio=$socio->id AND estado='no cancelado'");
+        $deudas=DB::select("SELECT * FROM deudas WHERE id_socio=$socio->id AND estado='no cancelada'");
         $pago=Pago::all()->last();
         $deuda_pagos=DeudaPago::where('id_pago',$pago->id)->get();
         return view('deuda_Pagos.create',compact('deudas','pago','socio','deuda_pagos'));
@@ -124,7 +124,7 @@ class DeudaPagoController extends Controller
         ]);
 
         $deuda->update([
-            'estado'=>"NO CANCELADO",
+            'estado'=>"NO CANCELADA",
         ]);
 
         $socio=Socio::find($pago->id_socio);

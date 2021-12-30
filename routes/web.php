@@ -37,6 +37,10 @@ Route::resource('socios',SocioController::class);
 Route::get('socios-deudas/{socio}',[SocioController::class,'show_deudas'])->name('socios.deuda');
 Route::get('socios-pagos/{socio}',[SocioController::class,'show_pagos'])->name('socios.pago');
 Route::get('socios-pagos-store/{socio}',[PagoController::class,'store_socio'])->name('socios.pago.store');
+Route::delete('socios-pagos-destroy/{pago}',[PagoController::class,'destroy_socio_pago'])->name('socios.pago.destroy');
+Route::delete('socios-deudas-destroy/{deuda}',[DeudaController::class,'destroy_socio_deuda'])->name('socios.deuda.destroy');
+Route::post('socios-deudas-store/{socio}',[DeudaController::class,'store_socio_deuda'])->name('socios.deuda.store');
+Route::post('socios-buscar',[SocioController::class,'buscar'])->name('socios.buscar');
 
 
 Route::resource('deudas',DeudaController::class);

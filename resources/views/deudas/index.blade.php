@@ -22,6 +22,7 @@
             <th scope="col">Socio</th>
             <th scope="col">Descripcion</th>
             <th scope="col">Monto</th>
+            <th scope="col">Estado</th>
             <th scope="col">Fecha de registro</th>
             <th scope="col" width="20%">Acciones</th>
           </tr>
@@ -35,6 +36,7 @@
               <td>{{DB::table('socios')->where('id',$deuda->id_socio)->value('nombre')}}</td>
               <td>{{$deuda->descripcion}}</td>
               <td>{{$deuda->monto}}</td>
+              <td>{{$deuda->estado}}</td>
               <td>{{$deuda->created_at}}</td>
               <td >
                 <form  action="{{route('deudas.destroy',$deuda)}}" method="post">

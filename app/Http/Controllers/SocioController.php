@@ -67,6 +67,14 @@ class SocioController extends Controller
      * @param  \App\Models\Socio  $socio
      * @return \Illuminate\Http\Response
      */
+    public function buscar(Request $request)
+    {
+        $request->validate([
+            'codigo'=>'required'
+        ]);
+        $socio=Socio::where('codigo',$request->codigo)->get()->first();
+        return redirect()->route('socios.edit',$socio);
+    }
     public function show(Socio $socio)
     {
     }

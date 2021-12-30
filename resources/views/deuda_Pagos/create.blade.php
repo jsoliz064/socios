@@ -90,7 +90,7 @@
             </div>
             
              <div class="row justify-content-end">
-                <form action="{{route('pagos.destroy', $pago)}}" method="post">
+                <form action="{{route('socios.pago.destroy', $pago)}}" method="post">
                     @csrf
                     @method('delete')
                     <button class="btn btn-danger btn-sm m-2" onclick="return confirm('¿ESTA SEGURO DE BORRAR?')" 

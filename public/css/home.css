@@ -1,0 +1,55 @@
+.title{
+    color: #007523;
+    font-size: 33px;
+    font-weight: 900;
+    font-family: 'Poppins', sans-serif;
+}
+.subtitle{
+    font-weight: 700;
+}
+.prueba{
+    padding: 1rem 0rem 0rem;
+    justify-content:center;
+    text-align: center;
+    min-height: 100px;
+    margin-bottom: 5%;
+    font-family: 'Ubuntu', sans-serif;
+}
+.contenido{
+    width: 60%;
+    height: 60%;
+}
+.cabecera{
+    background-color: #970606;
+    min-height: 100px;
+    min-width: 900px;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 5%;
+    padding: 0px 0px 0px 50px; 
+}
+body{
+    box-sizing:border-box;
+    background:  #F7F7F7;
+}
+.container{
+    
+    justify-content:center;
+    background: #F7F7F7;
+    font-family: 'arial';
+    padding: 0 0px;
+    
+}
+
+
+
+.menu{
+    display: flex;
+    justify-content:space-evenly;
+    padding:100px 50px 100px 150px;
+    flex-direction:row;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+
+

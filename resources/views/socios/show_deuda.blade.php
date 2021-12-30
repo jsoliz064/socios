@@ -24,14 +24,37 @@
       </div>
 
     <div class="card-body">
+
+      <form method="post" action="{{route('socios.deuda.store',$socio)}}" novalidate >
+        @csrf
+        <div class="row align-items-center my-4">
+          <div class="col-6">
+            <input type="text" name="descripcion" placeholder="Descripción" class="focus border-primary  form-control" >
+            @error('descripcion')
+              <div class="text-danger">
+                Debe ingresar el dato.
+              </div>
+            @enderror
+          </div>
+          <div class="col-4">
+            <input type="number" name="monto" placeholder="Monto" class="focus border-primary  form-control" >
+            @error('monto')
+              <div class="text-danger">
+                Debe ingresar el dato.
+              </div>
+            @enderror
+          </div>
+          <div align="left" class="col-2">
+              <button  class="btn btn-success form-control" type="submit">Registrar Deuda</button>
+          </div>
+        </div>
+      </form>
+
+      
+
       <div class="row align-items-center my-4">
         <div class="col">
-        </div>
-        <div class="col">
           <h4 class="font-weight-bold px-2" align="center">DEUDAS REGISTRADAS</h4>
-        </div>
-        <div align="right" class="col">
-            <a href="" class="btn btn-primary">Registrar deuda</a>
         </div>
       </div>
         <hr class="mb-1">
@@ -59,10 +82,9 @@
                   <td>{{$deuda->estado}}</td>
 
                   <td >
-                    <form  action="{{route('deudas.destroy',$deuda)}}" method="post">
+                    <form  action="{{route('socios.deuda.destroy',$deuda)}}" method="post">
                       @csrf
                       @method('delete')
-                       
                         <a class="btn btn-info btn-sm" href="{{route('deudas.edit',$deuda)}}">Ver o Editar</a> 
                         <button class="btn btn-danger btn-sm" onclick="return confirm('¿ESTA SEGURO DE  BORRAR?')" 
                         value="Borrar">Eliminar</button>
@@ -78,9 +100,20 @@
 @stop
 
 @section('css')
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap5.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap5.min.css">
 
 @stop
 
 @section('js')
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.23/js/dataTables.bootstrap5.min.js"></script>
+<script>
+    $(document).ready(function() {
+     $('#clientes').DataTable();
+    } );
+</script>
 
 @stop

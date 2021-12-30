@@ -44,8 +44,12 @@ class DeudaController extends Controller
      */
     public function store(Request $request)
     {
+        date_default_timezone_set("America/La_Paz");
+        $request->validate([
+            'descripcion'=>'required',
+            'monto'=>'required',
+        ]);
         if ($request->id_socio <>"null"){
-            date_default_timezone_set("America/La_Paz");
             $deudas=Deuda::create([
                 'id_socio'=>request('id_socio'),
                 'descripcion'=>request('descripcion'),
@@ -56,6 +60,22 @@ class DeudaController extends Controller
         }else{
             return redirect()->route('deudas.create')->with('status','Seleccione un Socio');
         }
+    }
+    public function store_socio_deuda(Request $request,Socio $socio)
+    {
+        
+        date_default_timezone_set("America/La_Paz");
+        $request->validate([
+            'descripcion'=>'required',
+            'monto'=>'required',
+        ]);
+        $deudas=Deuda::create([
+            'id_socio'=>$socio->id,
+            'descripcion'=>request('descripcion'),
+            'monto'=>request('monto'),
+            'estado'=>"NO CANCELADA",
+        ]);
+        return redirect()->route('socios.deuda',$socio);
     }
 
     /**
@@ -92,6 +112,7 @@ class DeudaController extends Controller
     public function update(Request $request, Deuda $deuda)
     {
         date_default_timezone_set("America/La_Paz");
+        $deuda->id_socio =$request->id_socio;
         $deuda->descripcion=$request->descripcion;
         $deuda->monto=$request->monto;
         $deuda->save();
@@ -108,5 +129,12 @@ class DeudaController extends Controller
     {
         $deuda->delete();
         return redirect()->route('deudas.index');
+    }
+
+    public function destroy_socio_deuda(Deuda $deuda)
+    {
+        $socio=Socio::find($deuda->id_socio);
+        $deuda->delete();
+        return redirect()->route('socios.deuda',$socio);
     }
 }

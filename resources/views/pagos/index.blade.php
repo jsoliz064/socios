@@ -9,7 +9,7 @@
 @section('content')
   <div class="card">
     <div class="card-header"> 
-          <a class="btn btn-primary btb-sm" href="{{route('deudas.create')}}">Registrar Deuda</a>    
+          <a class="btn btn-primary btb-sm" href="{{route('pagos.create')}}">Registrar Pago</a>    
     </div>
   </div>
 
@@ -41,7 +41,7 @@
                   @csrf
                   @method('delete')
                    
-                    <a class="btn btn-info btn-sm" href="{{route('pagos.edit',$pago)}}">Ver o Editar</a> 
+                    <a class="btn btn-info btn-sm" href="{{route('pagos.show',$pago)}}">Ver</a> 
                     <button class="btn btn-danger btn-sm" onclick="return confirm('¿ESTA SEGURO DE  BORRAR?')" 
                     value="Borrar">Eliminar</button>
                 </form>

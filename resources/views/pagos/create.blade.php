@@ -1,58 +1,45 @@
 @extends('adminlte::page')
 
-@section('title', 'Deudas - Socios')
+@section('title', 'Pagos')
 
 @section('content_header')
-    <h1>Registrar Deuda</h1>
+
 @stop
 
 @section('content')
-@if(session('status'))
-    <h4 class="alert alert-warning mb-2">{{session('status')}}</h4>
-@endif
+<br>
 <div class="card">
     <div class="card-body">
-        <form method="post" action="{{route('deudas.store')}}" novalidate >
-
+        <form method="post" action="{{route('pagos.store')}}" novalidate >
             @csrf
-            <h5>Socio:</h5>
-            <select name = "id_socio" id="id_socio" class="mi-selector form-control" >
-                <option value="null">Seleccione un Socio</option>
-                    @foreach ($socios as $socio)
-                        <option value="{{$socio->id}}">
-                            {{$socio->nombre}}
-                        </option>
-                    @endforeach
-            </select>
-           
-            @error('id_socio')
-                <p>DEBE SELECCIONAR UN SOCIO</p>
-            @enderror
-
-            <h5>Descripcion:</h5>
-            <input type="text"  name="descripcion"  class="focus border-primary  form-control">
-            @error('descripcion')
-                <p>DEBE INGRESAR BIEN EL DATO</p>
-            @enderror
-
-            <h5>Monto:</h5>
-            <input type="number"  name="monto" class="focus border-primary  form-control" >
-            @error('monto')
-            <p>DEBE INGRESAR BIEN EL DATO</p>
-            @enderror
-            
-            
-            <br>
-            <br>
-            
-            <button  class="btn btn-danger btn-sm" type="submit">Registrar</button>
-
-            <a href="{{route('deudas.index')}}"class="btn btn-warning text-white btn-sm">Volver</a>
+            <div align="center">
+                <h4><b>Registrar Pago:</b></h4>
+                <div class="row my-4">
+                    <div class="col"></div>
+                    <div class="col">
+                        <select name = "id_socio" id="id_socio" class="mi-selector form-control" >
+                            <option value="">Seleccione un Socio</option>
+                            @foreach ($socios as $socio)
+                                <option value="{{$socio->id}}">
+                                    {{$socio->nombre}}
+                                </option>
+                            @endforeach    
+                        </select>
+                        @error('id_socio')
+                            <p>DEBE SELECCIONAR UN SOCIO</p>
+                        @enderror
+                    </div>
+                    <div class="col"></div>  
+                </div>
+                
+                <button  class="btn btn-success btn-sm" type="submit">Siguiente</button>
+                <a href="{{route('pagos.index')}}"class="btn btn-warning text-white btn-sm">Volver</a>
+            </div>
         </form>
-
     </div>
 </div>
 @stop
+
 
 @section('css')
 

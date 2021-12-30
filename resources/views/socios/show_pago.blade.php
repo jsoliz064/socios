@@ -57,11 +57,11 @@
                 <td>{{$pago->total}}</td>
                 <td>{{$pago->created_at}}</td>
                 <td >
-                  <form  action="{{route('pagos.destroy',$pago)}}" method="post">
+                  <form  action="{{route('socios.pago.destroy',$pago)}}" method="post">
                     @csrf
                     @method('delete')
                      
-                      <a class="btn btn-info btn-sm" href="{{route('pagos.edit',$pago)}}">Ver o Editar</a> 
+                      <a class="btn btn-info btn-sm" href="{{route('pagos.show',$pago)}}">Ver</a> 
                       <button class="btn btn-danger btn-sm" onclick="return confirm('¿ESTA SEGURO DE  BORRAR?')" 
                       value="Borrar">Eliminar</button>
                   </form>
@@ -75,10 +75,23 @@
 </div>
 @stop
 
+
 @section('css')
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap5.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap5.min.css">
 
 @stop
 
 @section('js')
 
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.23/js/dataTables.bootstrap5.min.js"></script>
+<script>
+    $(document).ready(function() {
+     $('#clientes').DataTable();
+    } );
+</script>
+
 @stop
+
