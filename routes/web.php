@@ -6,6 +6,10 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\SocioController;
 use App\Http\Controllers\DeudaController;
 use App\Http\Controllers\userController;
+use App\Http\Controllers\PagoController;
+use App\Http\Controllers\DeudaPagoController;
+
+
 
 
 /*
@@ -30,7 +34,17 @@ Route::resource('users',userController::class)->names('admin.users');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('socios',SocioController::class);
-Route::get('socios-deudas/{socio}',[SocioController::class,'show_deuda'])->name('socios.deuda');
+Route::get('socios-deudas/{socio}',[SocioController::class,'show_deudas'])->name('socios.deuda');
+Route::get('socios-pagos/{socio}',[SocioController::class,'show_pagos'])->name('socios.pago');
+Route::get('socios-pagos-store/{socio}',[PagoController::class,'store_socio'])->name('socios.pago.store');
+
 
 Route::resource('deudas',DeudaController::class);
+
+Route::resource('pagos',PagoController::class);
+
+Route::resource('deuda_pagos',DeudaPagoController::class);
+
+
+Route::get('deuda-pagos-create/{socio}',[DeudaPagoController::class,'create_detalle'])->name('deuda.pagos.create');
 

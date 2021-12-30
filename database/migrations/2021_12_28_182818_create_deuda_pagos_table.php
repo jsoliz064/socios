@@ -15,6 +15,10 @@ class CreateDeudaPagosTable extends Migration
     {
         Schema::create('deuda_pagos', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('id_deuda');
+            $table->foreign('id_deuda')->references('id')->on('deudas')->onDelete('cascade')->onUpdate('cascade');
+            $table->unsignedBigInteger('id_pago');
+            $table->foreign('id_pago')->references('id')->on('pagos')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

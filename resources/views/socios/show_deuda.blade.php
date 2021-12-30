@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Socios')
+@section('title', 'Socios - Deudas')
 
 @section('content_header')
     
@@ -15,18 +15,26 @@
             <a class="nav-link" href="{{route('socios.edit',$socio)}}">Detalles</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="">Deudas</a>
+            <a class="nav-link active" href="#">Deudas</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="">Pagos</a>
+            <a class="nav-link" href="{{route('socios.pago',$socio)}}">Pagos</a>
           </li>
         </ul>
       </div>
 
     <div class="card-body">
-        <div align="center">
-            <h5 class="font-weight-bold px-2">DEUDAS REGISTRADAS</h5>
+      <div class="row align-items-center my-4">
+        <div class="col">
         </div>
+        <div class="col">
+          <h4 class="font-weight-bold px-2" align="center">DEUDAS REGISTRADAS</h4>
+        </div>
+        <div align="right" class="col">
+            <a href="" class="btn btn-primary">Registrar deuda</a>
+        </div>
+      </div>
+        <hr class="mb-1">
         <table class="table table-striped" id="clientes" >
             <thead>
               <tr>

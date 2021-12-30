@@ -19,7 +19,7 @@ class CreateDeudasTable extends Migration
             $table->string('descripcion');
             $table->float('monto');
             $table->string('estado');
-            $table->foreign('id_socio')->references('id')->on('deudas')->onDelete('set null')->onUpdate('cascade');
+            $table->foreign('id_socio')->references('id')->on('socios')->onDelete('set null')->onUpdate('cascade');
 
             $table->timestamps();
         });

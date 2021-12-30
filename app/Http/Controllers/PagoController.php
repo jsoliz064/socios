@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pago;
+use App\Models\Socio;
+use App\Models\Deuda;
+
 use Illuminate\Http\Request;
 
 class PagoController extends Controller
@@ -14,7 +17,8 @@ class PagoController extends Controller
      */
     public function index()
     {
-        //
+        $pagos=Pago::all();
+        return view('pagos.index',compact('pagos'));
     }
 
     /**
@@ -26,6 +30,7 @@ class PagoController extends Controller
     {
         //
     }
+    
 
     /**
      * Store a newly created resource in storage.
@@ -36,6 +41,15 @@ class PagoController extends Controller
     public function store(Request $request)
     {
         //
+    }
+    public function store_socio(Socio $socio)
+    {
+        $pago=Pago::create([
+            'id_socio' => $socio->id,
+            'total'=>0,
+            'deudas_pagadas'=>0,
+        ]);
+        return redirect()->route('deuda.pagos.create',$socio); 
     }
 
     /**
@@ -80,6 +94,8 @@ class PagoController extends Controller
      */
     public function destroy(Pago $pago)
     {
-        //
+        $socio=Socio::find($pago->id_socio);
+        $pago->delete();
+        return redirect()->route('socios.pago',$socio);
     }
 }

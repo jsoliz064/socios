@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Deudas')
+@section('title', 'Pagos')
 
 @section('content_header')
-  <h1>HISTORIAL DE DEUDAS</h1>
+  <h1>HISTORIAL DE PAGOS</h1>
 @stop
 
 @section('content')
@@ -20,8 +20,8 @@
           <tr>
             <th scope="col">ID</th>
             <th scope="col">Socio</th>
-            <th scope="col">Descripcion</th>
-            <th scope="col">Monto</th>
+            <th scope="col">Deudas pagadas</th>
+            <th scope="col">Total</th>
             <th scope="col">Fecha de registro</th>
             <th scope="col" width="20%">Acciones</th>
           </tr>
@@ -29,19 +29,19 @@
         
         <tbody>
 
-          @foreach ($deudas as $deuda)
+          @foreach ($pagos as $pago)
             <tr>
-              <td>{{$deuda->id}}</td>
-              <td>{{DB::table('socios')->where('id',$deuda->id_socio)->value('nombre')}}</td>
-              <td>{{$deuda->descripcion}}</td>
-              <td>{{$deuda->monto}}</td>
-              <td>{{$deuda->created_at}}</td>
+              <td>{{$pago->id}}</td>
+              <td>{{DB::table('socios')->where('id',$pago->id_socio)->value('nombre')}}</td>
+              <td>{{$pago->deudas_pagadas}}</td>
+              <td>{{$pago->total}}</td>
+              <td>{{$pago->created_at}}</td>
               <td >
-                <form  action="{{route('deudas.destroy',$deuda)}}" method="post">
+                <form  action="{{route('pagos.destroy',$pago)}}" method="post">
                   @csrf
                   @method('delete')
                    
-                    <a class="btn btn-info btn-sm" href="{{route('deudas.edit',$deuda)}}">Ver o Editar</a> 
+                    <a class="btn btn-info btn-sm" href="{{route('pagos.edit',$pago)}}">Ver o Editar</a> 
                     <button class="btn btn-danger btn-sm" onclick="return confirm('¿ESTA SEGURO DE  BORRAR?')" 
                     value="Borrar">Eliminar</button>
                 </form>

@@ -3,6 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\DeudaPago;
+use App\Models\Socio;
+use App\Models\Deuda;
+use App\Models\Pago;
+use Illuminate\Support\Facades\DB;
+
+
+
 use Illuminate\Http\Request;
 
 class DeudaPagoController extends Controller
@@ -26,6 +33,12 @@ class DeudaPagoController extends Controller
     {
         //
     }
+    public function create_detalle(Socio $socio){
+        $deudas=DB::select("SELECT * FROM deudas WHERE id_socio=$socio->id AND estado='no cancelado'");
+        $pago=Pago::all()->last();
+        $deuda_pagos=DeudaPago::where('id_pago',$pago->id)->get();
+        return view('deuda_Pagos.create',compact('deudas','pago','socio','deuda_pagos'));
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -35,8 +48,30 @@ class DeudaPagoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        date_default_timezone_set("America/La_Paz");
+        $request->validate([
+            'id_deuda'=>'required'
+        ]);
+        $deuda_pagos=DeudaPago::create([
+            'id_deuda'=>$request->id_deuda,
+            'id_pago'=>Pago::all()->last()->id,
+        ]);
+
+        $deuda=Deuda::find($request->id_deuda);
+        $deuda->update([
+            'estado'=>"CANCELADO",
+        ]);
+
+        $pago=Pago::all()->last();
+        $pago->update([
+            'total'=>$deuda->monto+$pago->total,
+            'deudas_pagadas'=>$pago->deudas_pagadas+1,
+        ]);
+        
+        $socio=Socio::find($request->id_socio);
+        return redirect()->route('deuda.pagos.create',$socio); 
     }
+    
 
     /**
      * Display the specified resource.
@@ -80,6 +115,20 @@ class DeudaPagoController extends Controller
      */
     public function destroy(DeudaPago $deudaPago)
     {
-        //
+        $pago=Pago::find($deudaPago->id_pago);
+        $deuda=Deuda::find($deudaPago->id_deuda);
+        
+        $pago->update([
+            'total'=>$pago->total-$deuda->monto,
+            'deudas_pagadas'=>$pago->deudas_pagadas-1,
+        ]);
+
+        $deuda->update([
+            'estado'=>"NO CANCELADO",
+        ]);
+
+        $socio=Socio::find($pago->id_socio);
+        $deudaPago->delete();
+        return redirect()->route('deuda.pagos.create',$socio); 
     }
 }

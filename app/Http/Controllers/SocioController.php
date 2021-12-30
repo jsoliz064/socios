@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Socio;
 use App\Models\Deuda;
+use App\Models\Pago;
+
 
 use Illuminate\Http\Request;
 
@@ -35,6 +37,7 @@ class SocioController extends Controller
         return view('socios.create');
         
     }
+    
 
     /**
      * Store a newly created resource in storage.
@@ -68,10 +71,16 @@ class SocioController extends Controller
     {
     }
 
-    public function show_deuda(Socio $socio)
+    public function show_deudas(Socio $socio)
     {
         $deudas=Deuda::where('id_socio',$socio->id)->get();
         return view('socios.show_deuda',compact('deudas','socio'));
+    }
+
+    public function show_pagos(Socio $socio)
+    {
+        $pagos=Pago::where('id_socio',$socio->id)->get();
+        return view('socios.show_pago',compact('pagos','socio'));
     }
 
     /**

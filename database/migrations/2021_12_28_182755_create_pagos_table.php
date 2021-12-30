@@ -15,6 +15,10 @@ class CreatePagosTable extends Migration
     {
         Schema::create('pagos', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('id_socio')->nullable();
+            $table->float('deudas_pagadas')->nullable();
+            $table->float('total')->nullable();
+            $table->foreign('id_socio')->references('id')->on('socios')->onDelete('set null')->onUpdate('cascade');
             $table->timestamps();
         });
     }
